@@ -18,6 +18,7 @@ public class GithubProvider {
         OkHttpClient client = new OkHttpClient();
 
         RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));
+        //使用okhttp3模拟post请求
         Request request = new Request.Builder()
                 .url("https://github.com/login/oauth/access_token")
                 .post(body)
@@ -35,12 +36,14 @@ public class GithubProvider {
 
     public GithubUser getUser(String accessToken) {
         OkHttpClient client = new OkHttpClient();
+        //使用okhttp3模拟get请求
         Request request = new Request.Builder()
                 .url("https://api.github.com/user?access_token=" + accessToken)
                 .build();
         try {
             Response response = client.newCall(request).execute();
             String string = response.body().string();
+            //利用fastJSON将返回的json格式的数据转化为定义好的GitHubUser类
             GithubUser githubUser = JSON.parseObject(string, GithubUser.class);
             return githubUser;
         } catch (Exception e) {

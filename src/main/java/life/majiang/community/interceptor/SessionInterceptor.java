@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +26,7 @@ import java.util.List;
 @Service
 public class SessionInterceptor implements HandlerInterceptor {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
     @Autowired
     private NotificationService notificationService;
